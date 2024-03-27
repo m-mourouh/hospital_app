@@ -1,6 +1,6 @@
 ![Static Badge](https://img.shields.io/badge/Java-17-orange)
 
-# Hospital app with spring boot
+# Hospital App With Spring Boot
 ![image](https://github.com/m-mourouh/hospital_app/assets/60442896/f44fc111-59c8-4485-943f-4309f721a406)
 
 ### Login page 
