@@ -8,6 +8,7 @@
 ### Home page 
 
 logged in as an `ADMIN`
+
 ![image](https://github.com/m-mourouh/hospital_app/assets/60442896/1d80d655-2027-45f1-a206-3c21d590b9d3)
 
 logged in as an `USER` 
