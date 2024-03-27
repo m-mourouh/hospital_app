@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid d-flex justify-content-center mt-5">
+        <div class="container">
+            <div class="card">
+                <p class="card-header h4">Patients List</p>
+                <div class="card-body">
+                    <form method="GET" th:action="@{/user/index}" class="mb-4">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" name="keyword" class="form-control"  placeholder="Enter a keyword" th:value="${keyword}" >
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Score</th>
+                            <th>Sick</th>
+                            <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="p:${patientsList}">
+                            <td th:text="${p.id}"></td>
+                            <td th:text="${p.name}"></td>
+                            <td th:text="${p.birthdate}"></td>
+                            <td th:text="${p.score}"></td>
+                            <td th:text="${p.sick}"></td>
+                            <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                                <a  onclick="return confirm('Are you sure you want to delete this patient ?')" class="btn btn-danger" th:href="@{/admin/deletePatient(id=${p.id}, page=${currentPage}, keyword=${keyword})}" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, page=${currentPage}, keyword=${keyword})}" title="Edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+                        <tr th:if="${patientsList.isEmpty()}">
+                            <td colspan="6" class="text-center">No patient found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li  th:each="page, status: ${pages}" >
+                                <a th:class="${currentPage == status.index ? 'page-link active' : 'page-link'}"  th:href="@{/user/index(page=${status.index}, keyword=${keyword})}" th:text="${status.index + 1}"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

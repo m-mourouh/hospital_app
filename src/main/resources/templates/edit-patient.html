@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="col-md-6">
+            <form method="POST" th:action="@{edit(page=${currentPage}, keyword=${keyword})}">
+                <div class="mb-3">
+                    <input type="hidden" class="form-control" id="id" name="id" th:value="${patient.id}">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${patient.name}">
+                    <small class="text-danger" th:errors="${patient.name}"></small>
+                </div>
+                <div class="mb-3">
+                    <label for="birthdate" class="form-label">Birth Date</label>
+                    <input type="date" class="form-control" id="birthdate"  name="birthdate" th:value="${patient.birthdate}">
+                    <small class="text-danger" th:errors="${patient.birthdate}"></small>
+                </div>
+                <div class="mb-3">
+                    <label for="score" class="form-label">Score</label>
+                    <input type="number" class="form-control" id="score"  name="score" th:value="${patient.score}">
+                    <small class="text-danger" th:errors="${patient.score}"></small>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="sick" name="sick" th:checked="${patient.sick}">
+                    <label class="form-check-label" for="sick" >Check if the patient is sick</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+</script>
+</body>
+</html>
